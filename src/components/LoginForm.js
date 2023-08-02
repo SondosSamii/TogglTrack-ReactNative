@@ -1,15 +1,18 @@
 import React, {useState} from 'react';
 import {
-  Button,
   Linking,
   StyleSheet,
   TextInput,
   Text,
   TouchableOpacity,
   View,
+  Pressable,
 } from 'react-native';
 import {Formik} from 'formik';
 import * as yup from 'yup';
+import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
+import {colors, getTheme} from '../styles/_themes';
+import {GlobalStyles, FormStyle} from '../styles/styles';
 
 const loginSchema = yup.object().shape({
   email: yup
@@ -24,6 +27,7 @@ const loginSchema = yup.object().shape({
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const theme = getTheme();
 
   return (
     <Formik
@@ -44,7 +48,7 @@ const LoginForm = () => {
       }) => (
         <View>
           <TextInput
-            style={styles.emailInput}
+            style={FormStyle.emailInput}
             onChangeText={handleChange('email')}
             onBlur={handleBlur('email')}
             value={values.email}
@@ -52,12 +56,12 @@ const LoginForm = () => {
             keyboardType="email-address"
           />
           {touched.email && errors.email && (
-            <Text style={styles.error}>{errors.email}</Text>
+            <Text style={FormStyle.error}>{errors.email}</Text>
           )}
 
-          <View style={styles.passwordContainer}>
+          <View style={FormStyle.passwordContainer}>
             <TextInput
-              style={styles.passwordInput}
+              style={FormStyle.passwordInput}
               onChangeText={handleChange('password')}
               onBlur={handleBlur('password')}
               value={values.password}
@@ -68,69 +72,40 @@ const LoginForm = () => {
               onPress={() =>
                 setShowPassword(prevShowPassword => !prevShowPassword)
               }>
-              <Text style={styles.passwordToggle}>
-                {showPassword ? 'Hide' : 'Show'}
-              </Text>
+              <FontAwesome6
+                name={showPassword ? 'eye-slash' : 'eye'}
+                size={20}
+                color={theme.textColor}
+                padding={10}
+              />
             </TouchableOpacity>
           </View>
           {touched.password && errors.password && (
-            <Text style={styles.error}>{errors.password}</Text>
+            <Text style={FormStyle.error}>{errors.password}</Text>
           )}
 
-          <Button title="Login" onPress={handleSubmit} disabled={!isValid} />
-
-          <View style={styles.forgotPasswordContainer}>
-            <Text>Forgot Password?</Text>
+          <View style={FormStyle.forgotPasswordContainer}>
+            <Text style={GlobalStyles.defaultText}>Forgot Password?</Text>
             <TouchableOpacity
               onPress={() =>
                 Linking.openURL('https://toggl.com/track/forgot-password/')
               }>
-              <Text style={styles.resetPassword}>Reset</Text>
+              <Text style={[GlobalStyles.defaultText, FormStyle.resetPassword]}>
+                Reset
+              </Text>
             </TouchableOpacity>
           </View>
+
+          <Pressable
+            onPress={handleSubmit}
+            disabled={!isValid}
+            style={[FormStyle.loginBtn, {backgroundColor: colors.secondary}]}>
+            <Text style={{color: colors.white}}>Login</Text>
+          </Pressable>
         </View>
       )}
     </Formik>
   );
 };
-
-const styles = StyleSheet.create({
-  emailInput: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    padding: 10,
-    marginBottom: 10,
-  },
-  error: {
-    color: 'red',
-    marginBottom: 5,
-  },
-  passwordContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#ccc',
-    marginBottom: 10,
-  },
-  passwordInput: {
-    flex: 1,
-    padding: 10,
-  },
-  passwordToggle: {
-    padding: 10,
-    color: 'blue',
-    textDecorationLine: 'underline',
-  },
-  forgotPasswordContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 10,
-  },
-  resetPassword: {
-    color: 'blue',
-    textDecorationLine: 'underline',
-    marginLeft: 5,
-  },
-});
 
 export default LoginForm;

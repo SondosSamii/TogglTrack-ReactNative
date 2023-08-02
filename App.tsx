@@ -7,9 +7,8 @@
 
 import React from 'react';
 import {SafeAreaView, ScrollView, StatusBar, View} from 'react-native';
-
-import {darkTheme, getTheme} from './src/components/_themes.js';
 import LoginPage from './src/components/LoginPage.js';
+import {darkTheme, getTheme} from './src/styles/_themes.js';
 
 function App(): JSX.Element {
   const theme = getTheme();
