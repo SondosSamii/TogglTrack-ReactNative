@@ -6,46 +6,27 @@
  */
 
 import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {SafeAreaView, ScrollView, StatusBar, View} from 'react-native';
 
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-
-import LoginForm from './src/components/LoginForm.js';
+import {darkTheme, getTheme} from './src/components/_themes.js';
+import LoginPage from './src/components/LoginPage.js';
 
 function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+  const theme = getTheme();
 
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <SafeAreaView style={{backgroundColor: theme.backgroundColor, flex: 1}}>
       <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
+        barStyle={theme ? 'light-content' : 'dark-content'}
+        backgroundColor={darkTheme.backgroundColor}
       />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          
+      <ScrollView contentInsetAdjustmentBehavior="automatic">
+        <View style={{margin: 20}}>
+          <LoginPage />
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({});
 
 export default App;
