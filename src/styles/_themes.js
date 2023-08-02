@@ -6,6 +6,7 @@ export const colors = {
   lightSecondary: '#f7d8f3',
   white: '#FFF',
   black: '#000',
+  disabled: '#ccc',
 };
 
 export const lightTheme = {

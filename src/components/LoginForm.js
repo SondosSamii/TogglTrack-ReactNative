@@ -99,8 +99,13 @@ const LoginForm = () => {
           <Pressable
             onPress={handleSubmit}
             disabled={!isValid}
-            style={[FormStyle.loginBtn, {backgroundColor: colors.secondary}]}>
-            <Text style={{color: colors.white}}>Login</Text>
+            style={[
+              FormStyle.loginBtn,
+              {backgroundColor: isValid ? colors.secondary : colors.disabled},
+            ]}>
+            <Text style={{color: isValid ? colors.white : colors.primary}}>
+              Login
+            </Text>
           </Pressable>
         </View>
       )}
