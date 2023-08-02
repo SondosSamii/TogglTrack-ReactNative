@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {
   Linking,
-  StyleSheet,
   TextInput,
   Text,
   TouchableOpacity,
@@ -75,7 +74,7 @@ const LoginForm = () => {
               <FontAwesome6
                 name={showPassword ? 'eye-slash' : 'eye'}
                 size={20}
-                color={theme.textColor}
+                color={colors.secondary}
                 padding={10}
               />
             </TouchableOpacity>
@@ -101,7 +100,7 @@ const LoginForm = () => {
             disabled={!isValid}
             style={[
               FormStyle.loginBtn,
-              {backgroundColor: isValid ? colors.secondary : colors.disabled},
+              {backgroundColor: isValid ? colors.secondary : colors.grey},
             ]}>
             <Text style={{color: isValid ? colors.white : colors.primary}}>
               Login

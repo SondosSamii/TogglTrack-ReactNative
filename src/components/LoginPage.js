@@ -1,13 +1,8 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
+import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import LoginForm from './LoginForm';
-import {getTheme} from '../styles/_themes.js';
+import {colors, getTheme} from '../styles/_themes.js';
 import {GlobalStyles, LoginPageStyle} from '../styles/styles';
 
 const LoginPage = () => {
@@ -16,6 +11,14 @@ const LoginPage = () => {
   return (
     <SafeAreaView>
       <View>
+        <View style={{backgroundColor: colors.secondary, borderRadius: 50, maxWidth: 38}}>
+          <FontAwesome6
+            name="power-off"
+            size={18}
+            color={colors.white}
+            padding={10}
+          />
+        </View>
         <Text style={[GlobalStyles.defaultText, LoginPageStyle.header]}>
           <Text style={LoginPageStyle.innerHeader}>toggle</Text> track
         </Text>

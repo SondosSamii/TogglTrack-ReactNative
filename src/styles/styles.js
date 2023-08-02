@@ -1,5 +1,5 @@
 import {Platform, StyleSheet} from 'react-native';
-import {getTheme} from './_themes';
+import {colors, getTheme} from './_themes';
 
 const theme = () => {
   const theme = getTheme();
@@ -36,8 +36,8 @@ export const LoginPageStyle = StyleSheet.create({
 
 export const FormStyle = StyleSheet.create({
   emailInput: {
-    borderWidth: 1,
-    borderColor: '#ccc',
+    borderWidth: 2,
+    borderColor: colors.grey,
     borderRadius: 15,
     padding: 10,
   },
@@ -48,8 +48,8 @@ export const FormStyle = StyleSheet.create({
   passwordContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#ccc',
+    borderWidth: 2,
+    borderColor: colors.grey,
     borderRadius: 15,
     marginTop: 10,
   },
