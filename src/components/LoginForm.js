@@ -11,7 +11,7 @@ import {Formik} from 'formik';
 import * as yup from 'yup';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import {useNavigation} from '@react-navigation/native';
-import {colors} from '../styles/_themes';
+import {colors, getTheme} from '../styles/_themes';
 import {GlobalStyles, FormStyle} from '../styles/styles';
 
 const loginSchema = yup.object().shape({
@@ -32,6 +32,7 @@ const loginSchema = yup.object().shape({
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigation = useNavigation();
+  const theme = getTheme();
 
   return (
     <Formik
@@ -90,12 +91,19 @@ const LoginForm = () => {
           )}
 
           <View style={FormStyle.forgotPasswordContainer}>
-            <Text style={GlobalStyles.defaultText}>Forgot Password?</Text>
+            <Text style={[GlobalStyles.defaultText, {color: theme.textColor}]}>
+              Forgot Password?
+            </Text>
             <TouchableOpacity
               onPress={() =>
                 Linking.openURL('https://toggl.com/track/forgot-password/')
               }>
-              <Text style={[GlobalStyles.defaultText, FormStyle.resetPassword]}>
+              <Text
+                style={[
+                  GlobalStyles.defaultText,
+                  FormStyle.resetPassword,
+                  {color: theme.textColor},
+                ]}>
                 Reset
               </Text>
             </TouchableOpacity>

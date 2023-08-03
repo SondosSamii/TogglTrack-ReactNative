@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView, Text} from 'react-native';
+import {Text} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import CreateTask from './CreateTask';
 import TasksList from './TasksList';
@@ -11,47 +11,50 @@ const HomeScreen = () => {
   const theme = getTheme();
 
   return (
-    <ScrollView
-      contentInsetAdjustmentBehavior="automatic"
-      style={{backgroundColor: theme.backgroundColor, flex: 1}}>
-      <Tab.Navigator
-        screenOptions={({route}) => ({
-          tabBarStyle: {
-            backgroundColor: theme.backgroundColor,
-            borderTopWidth: 0,
-            borderBottomWidth: 0.7,
-            borderBottomColor: colors.grey,
-          },
-          tabBarLabelStyle: {
-            fontSize: 14,
-            fontWeight: 'bold',
-          },
-          tabBarIcon: () => null,
-          tabBarLabel: ({focused}) => {
-            const activeTabStyle = focused
-              ? {
-                  borderBottomWidth: 1.5,
-                  borderBottomColor: colors.secondary,
-                  textAlign: 'center',
-                  width: '100%',
-                }
-              : {};
+    <Tab.Navigator
+      screenOptions={({route}) => ({
+        tabBarStyle: {
+          backgroundColor: theme.backgroundColor,
+          borderTopWidth: 0.7,
+          borderTopColor: colors.grey,
+        },
+        tabBarLabelStyle: {
+          fontSize: 14,
+          fontWeight: 'bold',
+        },
+        tabBarIcon: () => null,
+        tabBarLabel: ({focused}) => {
+          const defaultTabStyle = {
+            textAlign: 'center',
+            width: '100%',
+            height: '100%',
+            paddingTop: 10,
+            paddingBottom: 10,
+            color: theme.textColor,
+          };
+          const activeTabStyle = focused
+            ? {
+                borderTopWidth: 1.5,
+                borderTopColor: colors.secondary,
+              }
+            : {};
 
-            return (
-              <Text
-                style={[
-                  activeTabStyle,
-                  {paddingBottom: 10, color: theme.textColor},
-                ]}>
-                {route.name}
-              </Text>
-            );
-          },
-        })}>
-        <Tab.Screen name="Add Task" component={CreateTask} />
-        <Tab.Screen name="Tasks List" component={TasksList} />
-      </Tab.Navigator>
-    </ScrollView>
+          return (
+            <Text style={[defaultTabStyle, activeTabStyle]}>{route.name}</Text>
+          );
+        },
+      })}>
+      <Tab.Screen
+        name="Add Task"
+        component={CreateTask}
+        options={{headerShown: false}}
+      />
+      <Tab.Screen
+        name="Tasks List"
+        component={TasksList}
+        options={{headerShown: false}}
+      />
+    </Tab.Navigator>
   );
 };
 
