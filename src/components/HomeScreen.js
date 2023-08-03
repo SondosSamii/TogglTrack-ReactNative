@@ -48,8 +48,8 @@ const HomeScreen = () => {
             );
           },
         })}>
-        <Tab.Screen name="Tasks List" component={TasksList} />
         <Tab.Screen name="Add Task" component={CreateTask} />
+        <Tab.Screen name="Tasks List" component={TasksList} />
       </Tab.Navigator>
     </ScrollView>
   );
