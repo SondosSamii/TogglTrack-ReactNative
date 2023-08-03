@@ -90,12 +90,19 @@ const LoginForm = () => {
           )}
 
           <View style={FormStyle.forgotPasswordContainer}>
-            <Text style={GlobalStyles.defaultText}>Forgot Password?</Text>
+            <Text style={[GlobalStyles.defaultText, {color: theme.textColor}]}>
+              Forgot Password?
+            </Text>
             <TouchableOpacity
               onPress={() =>
                 Linking.openURL('https://toggl.com/track/forgot-password/')
               }>
-              <Text style={[GlobalStyles.defaultText, FormStyle.resetPassword]}>
+              <Text
+                style={[
+                  GlobalStyles.defaultText,
+                  FormStyle.resetPassword,
+                  {color: theme.textColor},
+                ]}>
                 Reset
               </Text>
             </TouchableOpacity>

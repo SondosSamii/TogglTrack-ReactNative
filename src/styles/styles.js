@@ -1,17 +1,14 @@
 import {Platform, StyleSheet} from 'react-native';
-import {colors, getTheme} from './_themes';
-
-const theme = () => {
-  const theme = getTheme();
-};
+import {colors} from './_themes';
 
 export const GlobalStyles = StyleSheet.create({
+  defaultView: {flex: 1, padding: 20},
   defaultText: {
     fontFamily: Platform.select({
       ios: 'System', // The default system font for iOS
       android: 'Roboto', // The default system font for Android
     }),
-    color: theme.textColor,
+    fontSize: 16,
   },
 });
 

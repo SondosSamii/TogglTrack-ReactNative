@@ -26,11 +26,11 @@ function App(): JSX.Element {
           backgroundColor={darkTheme.backgroundColor}
         />
         <Stack.Navigator>
-          <Stack.Screen
+          {/* <Stack.Screen
             name="Login"
             component={LoginPage}
             options={{headerShown: false}}
-          />
+          /> */}
           <Stack.Screen
             name="Home"
             component={HomeScreen}
