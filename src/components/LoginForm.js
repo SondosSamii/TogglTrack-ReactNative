@@ -18,6 +18,10 @@ const loginSchema = yup.object().shape({
   email: yup
     .string()
     .email('Invalid email format')
+    .test('email-validation', 'Invalid email format', function (value) {
+      const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+      return emailRegex.test(value);
+    })
     .required('Email is required'),
   password: yup
     .string()
