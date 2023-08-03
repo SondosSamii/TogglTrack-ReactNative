@@ -49,6 +49,7 @@ function App(): JSX.Element {
                 backgroundColor: theme.backgroundColor,
               },
               headerTintColor: theme.textColor,
+              headerLeft: () => null,
             }}
           />
         </Stack.Navigator>
