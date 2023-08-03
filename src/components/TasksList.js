@@ -1,9 +1,10 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {FlatList, Text, View} from 'react-native';
 import {getTheme} from '../styles/_themes';
 import {GlobalStyles} from '../styles/styles';
+import TaskListItem from './TaskListItem';
 
-const TasksList = () => {
+const TasksList = ({tasks}) => {
   const theme = getTheme();
 
   return (
@@ -12,9 +13,17 @@ const TasksList = () => {
         GlobalStyles.defaultView,
         {backgroundColor: theme.backgroundColor},
       ]}>
-      <Text style={[GlobalStyles.defaultText, {color: theme.textColor}]}>
-        Welcome to the Tasks List Component!
-      </Text>
+      {tasks && tasks.length > 0 ? (
+        <FlatList
+          data={tasks}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item}) => <TaskListItem task={item} />}
+        />
+      ) : (
+        <Text style={GlobalStyles.defaultText}>
+          Please add tasks to show here
+        </Text>
+      )}
     </View>
   );
 };

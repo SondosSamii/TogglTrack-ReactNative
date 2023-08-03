@@ -39,7 +39,6 @@ const LoginForm = () => {
       initialValues={{email: '', password: ''}}
       validationSchema={loginSchema}
       onSubmit={values => {
-        // Handle form submission here (e.g., login with email and password)
         console.log('Form submitted with values:', values);
         navigation.navigate('Home');
       }}>
@@ -54,7 +53,7 @@ const LoginForm = () => {
       }) => (
         <View>
           <TextInput
-            style={FormStyle.emailInput}
+            style={FormStyle.defaultInput}
             onChangeText={handleChange('email')}
             onBlur={handleBlur('email')}
             value={values.email}
@@ -65,7 +64,7 @@ const LoginForm = () => {
             <Text style={FormStyle.error}>{errors.email}</Text>
           )}
 
-          <View style={FormStyle.passwordContainer}>
+          <View style={[FormStyle.defaultInput, FormStyle.passwordContainer]}>
             <TextInput
               style={FormStyle.passwordInput}
               onChangeText={handleChange('password')}
@@ -113,7 +112,7 @@ const LoginForm = () => {
             onPress={handleSubmit}
             disabled={!isValid}
             style={[
-              FormStyle.loginBtn,
+              FormStyle.defaultBtn,
               {backgroundColor: isValid ? colors.secondary : colors.grey},
             ]}>
             <Text style={{color: isValid ? colors.white : colors.primary}}>

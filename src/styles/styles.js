@@ -32,7 +32,7 @@ export const LoginPageStyle = StyleSheet.create({
 });
 
 export const FormStyle = StyleSheet.create({
-  emailInput: {
+  defaultInput: {
     borderWidth: 2,
     borderColor: colors.grey,
     borderRadius: 15,
@@ -45,10 +45,8 @@ export const FormStyle = StyleSheet.create({
   passwordContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderWidth: 2,
-    borderColor: colors.grey,
-    borderRadius: 15,
     marginTop: 10,
+    padding: 0,
   },
   passwordInput: {
     flex: 1,
@@ -68,7 +66,7 @@ export const FormStyle = StyleSheet.create({
     textDecorationLine: 'underline',
     marginLeft: 5,
   },
-  loginBtn: {
+  defaultBtn: {
     flexDirection: 'row',
     justifyContent: 'center',
     borderRadius: 25,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Text} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import CreateTask from './CreateTask';
@@ -9,6 +9,12 @@ const Tab = createBottomTabNavigator();
 
 const HomeScreen = () => {
   const theme = getTheme();
+  const [tasks, setTasks] = useState([]);
+
+  const handleCreateTask = newTask => {
+    console.log(newTask);
+    setTasks([...tasks, newTask]);
+  };
 
   return (
     <Tab.Navigator
@@ -46,14 +52,23 @@ const HomeScreen = () => {
       })}>
       <Tab.Screen
         name="Add Task"
-        component={CreateTask}
-        options={{headerShown: false}}
-      />
+        options={{
+          headerStyle: {
+            backgroundColor: theme.backgroundColor,
+          },
+        }}>
+        {() => <CreateTask onSubmit={handleCreateTask} />}
+      </Tab.Screen>
       <Tab.Screen
         name="Tasks List"
-        component={TasksList}
-        options={{headerShown: false}}
-      />
+        initialParams={{tasks: tasks}}
+        options={{
+          headerStyle: {
+            backgroundColor: theme.backgroundColor,
+          },
+        }}>
+        {() => <TasksList tasks={tasks} />}
+      </Tab.Screen>
     </Tab.Navigator>
   );
 };
