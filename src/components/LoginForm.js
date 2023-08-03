@@ -10,7 +10,8 @@ import {
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
-import {colors, getTheme} from '../styles/_themes';
+import {useNavigation} from '@react-navigation/native';
+import {colors} from '../styles/_themes';
 import {GlobalStyles, FormStyle} from '../styles/styles';
 
 const loginSchema = yup.object().shape({
@@ -26,7 +27,7 @@ const loginSchema = yup.object().shape({
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const theme = getTheme();
+  const navigation = useNavigation();
 
   return (
     <Formik
@@ -35,6 +36,7 @@ const LoginForm = () => {
       onSubmit={values => {
         // Handle form submission here (e.g., login with email and password)
         console.log('Form submitted with values:', values);
+        navigation.navigate('Home');
       }}>
       {({
         handleChange,
