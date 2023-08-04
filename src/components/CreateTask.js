@@ -22,6 +22,7 @@ const CreateTask = ({onSubmit}) => {
   const [endTime, setEndTime] = useState(new Date());
   const [showStartTimePicker, setShowStartTimePicker] = useState(false);
   const [showEndTimePicker, setShowEndTimePicker] = useState(false);
+  const [taskDuration, setTaskDuration] = useState(new Date());
 
   const handleStartTimeChange = (event, selectedTime) => {
     const currentTime = selectedTime;
@@ -45,6 +46,19 @@ const CreateTask = ({onSubmit}) => {
     setShowEndTimePicker(Platform.OS === 'ios' ? !status : status);
   };
 
+  const calcDuration = (startDate, endDate) => {
+    const timeDifference = endDate - startDate;
+    const totalSeconds = Math.floor(timeDifference / 1000);
+
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+
+    const formattedDuration = `${hours.toString().padStart(2, '0')}:${minutes
+      .toString()
+      .padStart(2, '0')}`;
+    return formattedDuration;
+  };
+
   return (
     <View
       style={[
@@ -57,16 +71,19 @@ const CreateTask = ({onSubmit}) => {
           taskDescription: '',
           startTime: new Date(),
           endTime: new Date(),
+          taskDuration: '',
         }}
         validationSchema={addTaskSchema}
         onSubmit={(values, {resetForm}) => {
-          onSubmit(values);
+          const duration = calcDuration(startTime, endTime);
+          onSubmit({...values, taskDuration: duration});
 
           resetForm(
             {
               values: {
                 taskName: '',
                 taskDescription: '',
+                taskDuration: '',
               },
             },
             setStartTime(new Date()),
@@ -133,7 +150,14 @@ const CreateTask = ({onSubmit}) => {
               </Pressable>
 
               {startTime ? (
-                <Text>Selected: {startTime.toLocaleTimeString()}</Text>
+                <Text>
+                  Selected:{' '}
+                  {startTime.toLocaleTimeString([], {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false,
+                  })}
+                </Text>
               ) : (
                 ''
               )}
@@ -141,7 +165,7 @@ const CreateTask = ({onSubmit}) => {
               {showStartTimePicker && (
                 <DateTimePicker
                   testID="dateTimePicker"
-                  value={values.startTime}
+                  value={startTime}
                   mode="time"
                   is24Hour={true}
                   onChange={handleStartTimeChange}
@@ -174,7 +198,14 @@ const CreateTask = ({onSubmit}) => {
               </Pressable>
 
               {endTime ? (
-                <Text>Selected: {endTime.toLocaleTimeString()}</Text>
+                <Text>
+                  Selected:{' '}
+                  {endTime.toLocaleTimeString([], {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false,
+                  })}
+                </Text>
               ) : (
                 ''
               )}

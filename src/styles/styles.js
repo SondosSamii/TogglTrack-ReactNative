@@ -72,4 +72,12 @@ export const FormStyle = StyleSheet.create({
     borderRadius: 25,
     padding: 10,
   },
+  deleteBtn: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    borderTopWidth: 1,
+    borderTopColor: colors.grey,
+    paddingVertical: 10,
+    marginTop: 10,
+  },
 });

@@ -1,30 +1,38 @@
 import React from 'react';
-import {View, Text} from 'react-native';
-import {GlobalStyles} from '../styles/styles';
+import {View, Text, Pressable} from 'react-native';
+import {FormStyle, GlobalStyles} from '../styles/styles';
 import {colors} from '../styles/_themes';
 
 const TaskListItem = ({task}) => {
   return (
     <View
       style={{
-        borderBottomColor: colors.grey,
-        borderBottomWidth: 1,
-        paddingBottom: 10,
+        borderColor: colors.grey,
+        borderWidth: 1,
+        paddingVertical: 10,
+        marginVertical: 10,
+        borderRadius: 20,
       }}>
-      <Text style={GlobalStyles.defaultText}>Task Name: {task.taskName}</Text>
+      <Text style={[GlobalStyles.defaultText, {paddingHorizontal: 10}]}>
+        Task Name: {task.taskName}
+      </Text>
       {task.taskDescription ? (
-        <Text style={GlobalStyles.defaultText}>
+        <Text style={[GlobalStyles.defaultText, {paddingHorizontal: 10}]}>
           Task Description: {task.taskDescription}
         </Text>
       ) : (
         ''
       )}
-      <Text style={GlobalStyles.defaultText}>
-        Task Start Time: {task.startTime.toLocaleTimeString()}
+      <Text style={[GlobalStyles.defaultText, {paddingHorizontal: 10}]}>
+        Task Duration: {task.taskDuration}
       </Text>
-      <Text style={GlobalStyles.defaultText}>
-        Task End Time: {task.endTime.toLocaleTimeString()}
-      </Text>
+      <Pressable
+        onPress={() => {
+          console.log(task);
+        }}
+        style={FormStyle.deleteBtn}>
+        <Text style={{color: colors.secondary}}>Delete this task</Text>
+      </Pressable>
     </View>
   );
 };
