@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Text} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {useNavigation} from '@react-navigation/native';
 import CreateTask from './CreateTask';
 import TasksList from './TasksList';
 import {colors, getTheme} from '../styles/_themes';
@@ -10,10 +11,12 @@ const Tab = createBottomTabNavigator();
 const HomeScreen = () => {
   const theme = getTheme();
   const [tasks, setTasks] = useState([]);
+  const navigation = useNavigation();
 
   const handleCreateTask = newTask => {
     console.log(newTask);
     setTasks([...tasks, newTask]);
+    navigation.navigate('Tasks List');
   };
 
   return (
@@ -53,9 +56,20 @@ const HomeScreen = () => {
       <Tab.Screen
         name="Add Task"
         options={{
+          headerTitle: props => (
+            <Text
+              style={{
+                color: theme.textColor,
+                fontSize: 16,
+                fontWeight: 'bold',
+              }}>
+              Add new task
+            </Text>
+          ),
           headerStyle: {
             backgroundColor: theme.backgroundColor,
           },
+          headerTintColor: theme.textColor,
         }}>
         {() => <CreateTask onSubmit={handleCreateTask} />}
       </Tab.Screen>
@@ -63,9 +77,20 @@ const HomeScreen = () => {
         name="Tasks List"
         initialParams={{tasks: tasks}}
         options={{
+          headerTitle: props => (
+            <Text
+              style={{
+                color: theme.textColor,
+                fontSize: 16,
+                fontWeight: 'bold',
+              }}>
+              List of your tasks
+            </Text>
+          ),
           headerStyle: {
             backgroundColor: theme.backgroundColor,
           },
+          headerTintColor: theme.textColor,
         }}>
         {() => <TasksList tasks={tasks} />}
       </Tab.Screen>

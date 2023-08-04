@@ -23,26 +23,26 @@ const CreateTask = ({onSubmit}) => {
   const [showStartTimePicker, setShowStartTimePicker] = useState(false);
   const [showEndTimePicker, setShowEndTimePicker] = useState(false);
 
-  const handleStartTimeChange = selectedTime => {
-    setShowEndTimePicker(Platform.OS === 'ios' ? true : false);
-    setShowStartTimePicker(Platform.OS === 'ios' ? true : false);
-    if (selectedTime) {
-      setFieldValue('startTime', selectedTime.toLocaleTimeString());
-      setStartTime(selectedTime);
-    }
-    setShowStartTimePicker(false);
-    setShowEndTimePicker(false);
+  const handleStartTimeChange = (event, selectedTime) => {
+    const currentTime = selectedTime;
+    showTimepicker(false);
+    setStartTime(currentTime);
+    setFieldValue('startTime', currentTime.toLocaleTimeString());
   };
 
-  const handleEndTimeChange = selectedTime => {
-    setShowStartTimePicker(Platform.OS === 'ios' ? true : false);
-    setShowEndTimePicker(Platform.OS === 'ios' ? true : false);
-    if (selectedTime) {
-      setFieldValue('endTime', selectedTime.toLocaleTimeString());
-      setEndTime(selectedTime);
-    }
-    setShowStartTimePicker(false);
-    setShowEndTimePicker(false);
+  const handleEndTimeChange = (event, selectedTime) => {
+    const currentTime = selectedTime;
+    showTimepicker(false);
+    setEndTime(currentTime);
+    setFieldValue('endTime', currentTime.toLocaleTimeString());
+  };
+
+  const showTimepicker = status => {
+    console.log('Status: ', status);
+    setShowStartTimePicker(status);
+    setShowEndTimePicker(status);
+    setShowStartTimePicker(Platform.OS === 'ios' ? !status : status);
+    setShowEndTimePicker(Platform.OS === 'ios' ? !status : status);
   };
 
   return (
@@ -59,12 +59,26 @@ const CreateTask = ({onSubmit}) => {
           endTime: new Date(),
         }}
         validationSchema={addTaskSchema}
-        onSubmit={onSubmit}>
+        onSubmit={(values, {resetForm}) => {
+          onSubmit(values);
+
+          resetForm(
+            {
+              values: {
+                taskName: '',
+                taskDescription: '',
+              },
+            },
+            setStartTime(new Date()),
+            setEndTime(new Date()),
+          );
+        }}>
         {({
           handleChange,
           handleBlur,
           handleSubmit,
           setFieldValue,
+          resetForm,
           touched,
           errors,
           isValid,
@@ -78,6 +92,7 @@ const CreateTask = ({onSubmit}) => {
               value={values.taskName}
               placeholder="Task Name"
             />
+
             {touched.taskName && errors.taskName && (
               <Text style={FormStyle.error}>{errors.taskName}</Text>
             )}
@@ -113,19 +128,26 @@ const CreateTask = ({onSubmit}) => {
                   },
                 ]}>
                 <Text style={{color: theme ? colors.white : colors.primary}}>
-                  Select Start Time
+                  Select Start Time!
                 </Text>
               </Pressable>
-              {/* <Text>{values.startTime.toLocaleTimeString()}</Text> */}
-              <Text>{startTime.toLocaleTimeString()}</Text>
+
+              {startTime ? (
+                <Text>Selected: {startTime.toLocaleTimeString()}</Text>
+              ) : (
+                ''
+              )}
+
+              {showStartTimePicker && (
+                <DateTimePicker
+                  testID="dateTimePicker"
+                  value={values.startTime}
+                  mode="time"
+                  is24Hour={true}
+                  onChange={handleStartTimeChange}
+                />
+              )}
             </View>
-            {showStartTimePicker && (
-              <DateTimePicker
-                value={values.startTime}
-                mode="time"
-                onChange={handleStartTimeChange}
-              />
-            )}
 
             <View
               style={{
@@ -147,19 +169,26 @@ const CreateTask = ({onSubmit}) => {
                   },
                 ]}>
                 <Text style={{color: theme ? colors.white : colors.primary}}>
-                  Select End Time
+                  Select End Time!
                 </Text>
               </Pressable>
-              {/* <Text>{values.endTime.toLocaleTimeString()}</Text> */}
-              <Text>{endTime.toLocaleTimeString()}</Text>
+
+              {endTime ? (
+                <Text>Selected: {endTime.toLocaleTimeString()}</Text>
+              ) : (
+                ''
+              )}
+
+              {showEndTimePicker && (
+                <DateTimePicker
+                  testID="dateTimePicker"
+                  value={endTime}
+                  mode="time"
+                  is24Hour={true}
+                  onChange={handleEndTimeChange}
+                />
+              )}
             </View>
-            {showEndTimePicker && (
-              <DateTimePicker
-                value={values.endTime}
-                mode="time"
-                onChange={handleEndTimeChange}
-              />
-            )}
 
             <Pressable
               onPress={handleSubmit}
