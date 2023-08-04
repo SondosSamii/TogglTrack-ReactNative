@@ -3,7 +3,11 @@ import {View, Text, Pressable} from 'react-native';
 import {FormStyle, GlobalStyles} from '../styles/styles';
 import {colors} from '../styles/_themes';
 
-const TaskListItem = ({task}) => {
+const TaskListItem = ({task, taskId, onDeleteTask}) => {
+  const handleDeleteTask = () => {
+    onDeleteTask(taskId);
+  };
+
   return (
     <View
       style={{
@@ -26,11 +30,8 @@ const TaskListItem = ({task}) => {
       <Text style={[GlobalStyles.defaultText, {paddingHorizontal: 10}]}>
         Task Duration: {task.taskDuration}
       </Text>
-      <Pressable
-        onPress={() => {
-          console.log(task);
-        }}
-        style={FormStyle.deleteBtn}>
+      {/* <Pressable onPress={onDeleteTask(task.id)} style={FormStyle.deleteBtn}> */}
+      <Pressable onPress={handleDeleteTask} style={FormStyle.deleteBtn}>
         <Text style={{color: colors.secondary}}>Delete this task</Text>
       </Pressable>
     </View>

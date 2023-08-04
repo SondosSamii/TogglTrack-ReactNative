@@ -39,7 +39,6 @@ const CreateTask = ({onSubmit}) => {
   };
 
   const showTimepicker = status => {
-    console.log('Status: ', status);
     setShowStartTimePicker(status);
     setShowEndTimePicker(status);
     setShowStartTimePicker(Platform.OS === 'ios' ? !status : status);
@@ -76,6 +75,7 @@ const CreateTask = ({onSubmit}) => {
         validationSchema={addTaskSchema}
         onSubmit={(values, {resetForm}) => {
           const duration = calcDuration(startTime, endTime);
+          setTaskDuration(duration);
           onSubmit({...values, taskDuration: duration});
 
           resetForm(
@@ -84,6 +84,8 @@ const CreateTask = ({onSubmit}) => {
                 taskName: '',
                 taskDescription: '',
                 taskDuration: '',
+                startTime: new Date().toISOString(),
+                endTime: new Date().toISOString(),
               },
             },
             setStartTime(new Date()),

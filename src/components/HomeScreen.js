@@ -14,9 +14,14 @@ const HomeScreen = () => {
   const navigation = useNavigation();
 
   const handleCreateTask = newTask => {
-    console.log(newTask);
-    setTasks([...tasks, newTask]);
+    const updatedTask = {...newTask, id: new Date().getTime()}; // Assign a unique id
+    setTasks([...tasks, updatedTask]);
     navigation.navigate('Tasks List');
+  };
+
+  const handleDeleteTask = taskId => {
+    const updatedTasks = tasks.filter(task => task.id !== taskId);
+    setTasks(updatedTasks);
   };
 
   return (
@@ -75,7 +80,7 @@ const HomeScreen = () => {
       </Tab.Screen>
       <Tab.Screen
         name="Tasks List"
-        initialParams={{tasks: tasks}}
+        initialParams={{taskIds: tasks.map((task, index) => index)}}
         options={{
           headerTitle: props => (
             <Text
@@ -92,7 +97,7 @@ const HomeScreen = () => {
           },
           headerTintColor: theme.textColor,
         }}>
-        {() => <TasksList tasks={tasks} />}
+        {() => <TasksList tasks={tasks} onDeleteTask={handleDeleteTask} />}
       </Tab.Screen>
     </Tab.Navigator>
   );

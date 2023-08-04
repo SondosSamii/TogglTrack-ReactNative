@@ -4,7 +4,7 @@ import {getTheme} from '../styles/_themes';
 import {GlobalStyles} from '../styles/styles';
 import TaskListItem from './TaskListItem';
 
-const TasksList = ({tasks}) => {
+const TasksList = ({tasks, onDeleteTask}) => {
   const theme = getTheme();
 
   return (
@@ -17,7 +17,13 @@ const TasksList = ({tasks}) => {
         <FlatList
           data={tasks}
           keyExtractor={(item, index) => index.toString()}
-          renderItem={({item}) => <TaskListItem task={item} />}
+          renderItem={({item}) => (
+            <TaskListItem
+              task={item}
+              taskId={item.id}
+              onDeleteTask={() => onDeleteTask(item.id)}
+            />
+          )}
         />
       ) : (
         <Text style={GlobalStyles.defaultText}>
