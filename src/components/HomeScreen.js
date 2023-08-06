@@ -50,6 +50,7 @@ const HomeScreen = () => {
             ? {
                 borderTopWidth: 1.5,
                 borderTopColor: colors.secondary,
+                color: colors.secondary,
               }
             : {};
 
