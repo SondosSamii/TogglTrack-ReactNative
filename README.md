@@ -2,6 +2,32 @@
 
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
+# Screenshots
+
+## Light Theme
+
+<img src="https://github.com/SondosSamii/TogglTrack-ReactNative/assets/16169114/260cf89a-b92a-45b6-81b6-49697cb2d8eb" width="300px" alt="Login Form">
+
+<img src="https://github.com/SondosSamii/TogglTrack-ReactNative/assets/16169114/49c1632a-6289-4c24-a05c-caee1eb1589e" width="300px" alt="Login Form with invalid info">
+
+<img src="https://github.com/SondosSamii/TogglTrack-ReactNative/assets/16169114/b98efd46-d59d-43e6-b397-8041512844cb" width="300px" alt="Login Form with Show Password">
+
+<img src="https://github.com/SondosSamii/TogglTrack-ReactNative/assets/16169114/10ccc4b8-f8dc-4d92-9527-026dd62e34c0" width="300px" alt="Add new task Form">
+
+<img src="https://github.com/SondosSamii/TogglTrack-ReactNative/assets/16169114/1a1787fd-c4af-42c1-9a38-94dd303d3f87" width="300px" alt="List of tasks - Empty">
+
+<img src="https://github.com/SondosSamii/TogglTrack-ReactNative/assets/16169114/f7bc0ca1-6334-4e0c-b52f-aa0a726a1813" width="300px" alt="List of tasks">
+
+## Dark Theme
+
+<img src="https://github.com/SondosSamii/TogglTrack-ReactNative/assets/16169114/726d5e3c-390d-42f7-a900-7a7a96b8df42" width="300px" alt="Login Form">
+
+<img src="https://github.com/SondosSamii/TogglTrack-ReactNative/assets/16169114/1aa4c474-b470-4e30-b615-9bd6b8258c50" width="300px" alt="Add new task Form">
+
+<img src="https://github.com/SondosSamii/TogglTrack-ReactNative/assets/16169114/9804c2ce-e4be-4740-8096-cb3b35b48e8e" width="300px" alt="List of tasks - Empty">
+
+<img src="https://github.com/SondosSamii/TogglTrack-ReactNative/assets/16169114/370bcc62-10a9-4bd9-abbf-60336b094297" width="300px" alt="List of tasks">
+
 # Getting Started
 
 >**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
