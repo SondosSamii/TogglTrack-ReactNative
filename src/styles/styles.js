@@ -77,7 +77,7 @@ export const FormStyle = StyleSheet.create({
     justifyContent: 'center',
     borderTopWidth: 1,
     borderTopColor: colors.grey,
-    paddingVertical: 10,
+    paddingTop: 10,
     marginTop: 10,
   },
 });

@@ -17,20 +17,23 @@ const TaskListItem = ({task, taskId, onDeleteTask}) => {
         marginVertical: 10,
         borderRadius: 20,
       }}>
-      <Text style={[GlobalStyles.defaultText, {paddingHorizontal: 10}]}>
-        Task Name: {task.taskName}
+      <Text
+        style={[
+          GlobalStyles.defaultText,
+          {paddingHorizontal: 10, fontSize: 18, fontWeight: 'bold'},
+        ]}>
+        {task.taskName}
       </Text>
       {task.taskDescription ? (
         <Text style={[GlobalStyles.defaultText, {paddingHorizontal: 10}]}>
-          Task Description: {task.taskDescription}
+          {task.taskDescription}
         </Text>
       ) : (
         ''
       )}
       <Text style={[GlobalStyles.defaultText, {paddingHorizontal: 10}]}>
-        Task Duration: {task.taskDuration}
+        Duration: {task.taskDuration}
       </Text>
-      {/* <Pressable onPress={onDeleteTask(task.id)} style={FormStyle.deleteBtn}> */}
       <Pressable onPress={handleDeleteTask} style={FormStyle.deleteBtn}>
         <Text style={{color: colors.secondary}}>Delete this task</Text>
       </Pressable>
